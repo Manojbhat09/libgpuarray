@@ -1,8 +1,34 @@
 import sys
 import os
 import versioneer
+from setuptools import setup, find_packages
+from os import path
 
 have_cython = False
+
+loc = path.abspath(path.dirname(__file__))
+
+with open(loc + '/requirements.txt') as f:
+    requirements = f.read().splitlines()
+
+required = []
+dependency_links = []
+# do not add to required lines pointing to git repositories
+EGG_MARK = '#egg='
+requirements.append("git+https://github.com/Manojbhat09/mako@changed#egg=Mako-1.1.2-py2.7.egg")
+requirements.append("six")
+for line in requirements:
+    if line.startswith('-e git:') or line.startswith('-e git+') or \
+            line.startswith('git:') or line.startswith('git+'):
+        if EGG_MARK in line:
+            package_name = line[line.find(EGG_MARK) + len(EGG_MARK):]
+            required.append(package_name)
+            dependency_links.append(line)
+        else:
+            print('Dependency to a git repository should have the format:')
+            print('git+ssh://git@github.com/xxxxx/xxxxxx#egg=package_name')
+    else:
+        required.append(line)
 
 try:
     import Cython
@@ -130,6 +156,9 @@ setup(name='pygpu',
                               'blas_api.h', 'numpy_compat.h',
                               'collectives.h', 'collectives_api.h']},
       ext_modules=cythonize(exts),
-      install_requires=[
-          'git+https://github.com/Manojbhat09/mako@changed#egg=Mako-1.1.2-py2.7.egg', 'six'],
-      )
+      install_requires=required,
+      dependency_links=dependency_links
+     )
+#       install_requires=[
+#           'MakoM @ git+https://github.com/Manojbhat09/mako@changed#egg=Mako-1.1.2-py2.7.egg', 'six'],
+#       )
