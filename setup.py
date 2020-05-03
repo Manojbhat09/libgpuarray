@@ -130,5 +130,6 @@ setup(name='pygpu',
                               'blas_api.h', 'numpy_compat.h',
                               'collectives.h', 'collectives_api.h']},
       ext_modules=cythonize(exts),
-      install_requires=['mako==0.7', 'six'],
+      install_requires=[
+          'mako @ git+ssh://git@github.com/Manojbhat09/mako@changed#egg=mako', 'six'],
       )
