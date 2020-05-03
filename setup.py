@@ -131,5 +131,5 @@ setup(name='pygpu',
                               'collectives.h', 'collectives_api.h']},
       ext_modules=cythonize(exts),
       install_requires=[
-          'mako @ git+ssh://git@github.com/Manojbhat09/mako@changed#egg=mako', 'six'],
+          'mako @ git+https://github.com/Manojbhat09/mako@changed#egg=Mako-1.1.2-py2.7.egg', 'six'],
       )
