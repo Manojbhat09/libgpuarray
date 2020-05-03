@@ -241,12 +241,12 @@ cuda_context *cuda_make_ctx(CUcontext ctx, gpucontext_props *p) {
   e = get_cc(dev, &cc_major, &cc_minor, global_err);
   if (e != GA_NO_ERROR)
     return NULL;
-
+  /*
   if ((major >= 9 && cc_major <= 2) || (major >= 7 && cc_major <= 1)) {
     error_set(global_err, GA_UNSUPPORTED_ERROR,
               "GPU is too old for CUDA version");
     return NULL;
-  }
+  }*/
 
   res = calloc(1, sizeof(*res));
   if (res == NULL) {
