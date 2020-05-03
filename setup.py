@@ -8,9 +8,9 @@ have_cython = False
 
 loc = path.abspath(path.dirname(__file__))
 
-with open(loc + '/requirements.txt') as f:
-    requirements = f.read().splitlines()
-
+# with open(loc + '/requirements.txt') as f:
+#     requirements = f.read().splitlines()
+requirements = []
 required = []
 dependency_links = []
 # do not add to required lines pointing to git repositories
